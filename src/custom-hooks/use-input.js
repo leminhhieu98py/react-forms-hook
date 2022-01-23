@@ -7,18 +7,21 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-    console.log({ state, action });
     switch (action.type) {
         case "CHANGE": {
-            state.value = action.value;
-            state.valid = action.valid;
-            state.isTouched = true;
-            return state;
+            return {
+                value: action.value,
+                valid: action.valid,
+                isTouched: true,
+            };
         }
 
         case "BLUR": {
-            state.isTouched = true;
-            return state;
+            return {
+                value: action.value,
+                valid: action.valid,
+                isTouched: true,
+            };
         }
 
         default:
@@ -26,7 +29,7 @@ const reducer = (state, action) => {
     }
 };
 
-const useInput = (isValid) => {
+const useInput = (validateValueFunction) => {
     // const [value, setValue] = useState("");
     // const [valid, setValid] = useState(false);
     // const [isTouched, setIsTouched] = useState(false);
@@ -37,15 +40,15 @@ const useInput = (isValid) => {
     const onValueChange = (e) => {
         const enteredValue = e.target.value.trim();
         console.log(enteredValue);
-        console.log(isValid(enteredValue));
+        console.log(validateValueFunction(enteredValue));
         dispatchState({
             type: "CHANGE",
             value: enteredValue,
-            valid: isValid(enteredValue),
+            valid: validateValueFunction(enteredValue),
         });
         // setValue(enteredValue);
         // setIsTouched(true);
-        // if (isValid(enteredValue)) {
+        // if (validateValueFunction(enteredValue)) {
         //     setValid(true);
         // } else {
         //     setValid(false);
