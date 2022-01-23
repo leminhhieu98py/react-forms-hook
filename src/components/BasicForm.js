@@ -1,6 +1,6 @@
 import useInput from "./../custom-hooks/use-input";
 
-const BasicForm = (props) => {
+const BasicForm = () => {
     const {
         value: enteredFirstname,
         onValueChange: onFirstnameChange,
