@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
 
 const initialState = {
     value: "",
@@ -30,12 +30,7 @@ const reducer = (state, action) => {
 };
 
 const useInput = (validateValueFunction) => {
-    // const [value, setValue] = useState("");
-    // const [valid, setValid] = useState(false);
-    // const [isTouched, setIsTouched] = useState(false);
-
     const [inputState, dispatchState] = useReducer(reducer, initialState);
-    console.log(inputState);
 
     const onValueChange = (e) => {
         const enteredValue = e.target.value.trim();
@@ -46,20 +41,12 @@ const useInput = (validateValueFunction) => {
             value: enteredValue,
             valid: validateValueFunction(enteredValue),
         });
-        // setValue(enteredValue);
-        // setIsTouched(true);
-        // if (validateValueFunction(enteredValue)) {
-        //     setValid(true);
-        // } else {
-        //     setValid(false);
-        // }
     };
 
     const onValueBlur = () => {
         dispatchState({
             type: "BLUR",
         });
-        // setIsTouched(true);
     };
 
     return {
